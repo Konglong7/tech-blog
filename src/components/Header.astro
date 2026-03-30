@@ -1,0 +1,24 @@
+---
+/**
+ * 网站头部导航组件
+ * 包含 Logo、导航链接和深色模式切换按钮
+ */
+import DarkModeToggle from './DarkModeToggle.astro';
+---
+
+<header class="sticky top-0 z-50 bg-[var(--bg-primary)] border-b border-[var(--border-color)] backdrop-blur-sm bg-opacity-90">
+  <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="text-2xl font-bold hover:opacity-80 transition-opacity">
+      🦖 恐龙大王
+    </a>
+
+    <!-- 导航链接 -->
+    <div class="flex items-center gap-6">
+      <a href="/" class="hover:text-[var(--accent)] transition-colors">首页</a>
+      <a href="/blog" class="hover:text-[var(--accent)] transition-colors">博客</a>
+      <a href="/about" class="hover:text-[var(--accent)] transition-colors">关于</a>
+      <DarkModeToggle />
+    </div>
+  </nav>
+</header>

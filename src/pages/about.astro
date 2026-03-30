@@ -1,0 +1,51 @@
+---
+/**
+ * 关于页面
+ * 介绍博主信息
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<BaseLayout title="关于我 - 恐龙大王的技术博客">
+  <div class="min-h-screen flex flex-col">
+    <Header />
+
+    <main class="flex-1 max-w-4xl mx-auto px-4 py-12 w-full">
+      <article class="prose">
+        <h1 class="text-4xl font-bold mb-8">关于我</h1>
+
+        <div class="space-y-6 text-[var(--text-secondary)]">
+          <p>
+            你好！我是<strong class="text-[var(--text-primary)]">恐龙大王</strong>，一名热爱技术的开发者。
+          </p>
+
+          <p>
+            这个博客是我记录技术学习、分享开发经验的地方。我相信通过写作可以更好地理解技术，
+            也希望我的文章能够帮助到其他开发者。
+          </p>
+
+          <h2 class="text-2xl font-bold text-[var(--text-primary)] mt-8 mb-4">技术栈</h2>
+          <ul class="list-disc list-inside space-y-2">
+            <li>前端开发：React、Vue、TypeScript</li>
+            <li>后端开发：Node.js、Python</li>
+            <li>工具链：Git、Docker、CI/CD</li>
+          </ul>
+
+          <h2 class="text-2xl font-bold text-[var(--text-primary)] mt-8 mb-4">联系方式</h2>
+          <p>
+            如果你想和我交流技术，欢迎通过以下方式联系我：
+          </p>
+          <ul class="list-disc list-inside space-y-2">
+            <li>GitHub: <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-[var(--accent)]">@your-username</a></li>
+            <li>Email: your-email@example.com</li>
+          </ul>
+        </div>
+      </article>
+    </main>
+
+    <Footer />
+  </div>
+</BaseLayout>

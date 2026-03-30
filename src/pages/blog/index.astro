@@ -1,0 +1,67 @@
+---
+/**
+ * 博客列表页
+ * 展示所有已发布的博客文章
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import '../../styles/global.css';
+
+// 获取所有文章并按日期排序
+const allPosts = await getCollection('blog');
+const publishedPosts = allPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// 获取所有标签
+const allTags = [...new Set(publishedPosts.flatMap(post => post.data.tags))];
+---
+
+<BaseLayout title="博客文章 - 恐龙大王的技术博客">
+  <div class="min-h-screen flex flex-col">
+    <Header />
+
+    <main class="flex-1 max-w-6xl mx-auto px-4 py-12 w-full">
+      <h1 class="text-4xl font-bold mb-8">所有文章</h1>
+
+      <!-- 标签过滤 -->
+      {allTags.length > 0 && (
+        <div class="mb-8 flex flex-wrap gap-2">
+          <span class="text-[var(--text-secondary)]">标签：</span>
+          {allTags.map(tag => (
+            <a
+              href={`/blog/tag/${tag}`}
+              class="px-3 py-1 bg-[var(--bg-secondary)] rounded-full text-sm hover:bg-[var(--accent)] hover:text-white transition-colors"
+            >
+              #{tag}
+            </a>
+          ))}
+        </div>
+      )}
+
+      <!-- 文章列表 -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {publishedPosts.map(post => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            slug={post.id.replace('.md', '')}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+
+      {publishedPosts.length === 0 && (
+        <p class="text-center text-[var(--text-secondary)] py-12">
+          暂无文章，敬请期待...
+        </p>
+      )}
+    </main>
+
+    <Footer />
+  </div>
+</BaseLayout>
