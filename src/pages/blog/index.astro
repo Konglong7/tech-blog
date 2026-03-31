@@ -35,7 +35,6 @@ const allTags = [...new Set(publishedPosts.flatMap(post => post.data.tags))];
             <a
               href={`/blog/tag/${tag}`}
               class="tag-link px-3 py-1 rounded-full text-sm transition-all duration-200"
-              style="background-color: var(--bg-secondary); color: var(--text-primary);"
             >
               #{tag}
             </a>

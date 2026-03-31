@@ -108,27 +108,63 @@ a:hover {
 .tag-link {
   display: inline-block;
   background-color: var(--bg-secondary);
-  color: var(--text-primary);
+  color: var(--text-primary) !important;
   border: 1px solid var(--border-color);
 }
 
 .tag-link::selection {
-  background-color: var(--accent);
+  background-color: var(--accent) !important;
   color: #ffffff !important;
+  text-shadow: none !important;
 }
 
 .tag-link::-moz-selection {
-  background-color: var(--accent);
+  background-color: var(--accent) !important;
   color: #ffffff !important;
+  text-shadow: none !important;
 }
 
 .tag-link:hover {
-  background-color: var(--accent);
+  background-color: var(--accent) !important;
   color: #ffffff !important;
   border-color: var(--accent);
   opacity: 1;
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
+}
+
+/* 文章卡片标签样式 */
+.card-tag {
+  background-color: var(--bg-primary);
+  color: var(--text-secondary) !important;
+  border-color: var(--border-color);
+}
+
+.card-tag::selection {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+.card-tag::-moz-selection {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+/* 文章详情页标签样式 */
+.article-tag {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary) !important;
+  border-color: var(--border-color);
+}
+
+.article-tag::selection {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+.article-tag::-moz-selection {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
 }
 
 /* 文章内容样式 */
