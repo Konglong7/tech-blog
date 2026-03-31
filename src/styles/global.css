@@ -5,17 +5,6 @@
  * 定义深色模式和基础样式
  */
 
-/* 防止页面加载时的布局偏移 */
-@layer base {
-  html {
-    font-size: 16px;
-  }
-
-  body {
-    min-height: 100vh;
-  }
-}
-
 /* 深色模式变量 */
 :root {
   --bg-primary: #ffffff;
@@ -26,7 +15,6 @@
   --accent: #3b82f6;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --bg-primary-rgb: 255, 255, 255;
 }
 
 .dark {
@@ -38,31 +26,18 @@
   --accent: #60a5fa;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
-  --bg-primary-rgb: 15, 23, 42;
 }
 
 /* 基础样式 */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
   scroll-behavior: smooth;
-  /* 优化字体渲染 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  /* 防止布局偏移 */
-  overflow-x: hidden;
-}
-
-/* 页面加载完成后显示 */
-html.wf-active,
-html.wf-inactive {
-  visibility: visible !important;
-  opacity: 1 !important;
 }
 
 body {
@@ -72,14 +47,11 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Microsoft YaHei', '微软雅黑', sans-serif;
   line-height: 1.7;
   font-size: 16px;
-  /* 提高字体清晰度 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* 防止字体重叠 */
-  letter-spacing: 0.01em;
-  /* 防止布局偏移 */
   min-height: 100vh;
-  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 /* 代码块样式 */
@@ -207,21 +179,6 @@ a:hover {
   margin: 2.5rem 0;
   max-width: 100%;
   height: auto;
-  /* 防止图片加载时的布局偏移 */
-  display: block;
-}
-
-/* 防止媒体元素导致的布局偏移 */
-img, video, iframe {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* 确保 SVG 不会导致布局问题 */
-svg {
-  display: inline-block;
-  vertical-align: middle;
 }
 
 .prose blockquote {
