@@ -46,11 +46,13 @@ body {
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Microsoft YaHei', '微软雅黑', sans-serif;
-  line-height: 1.6;
+  line-height: 1.7;
   font-size: 16px;
   /* 提高字体清晰度 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* 防止字体重叠 */
+  letter-spacing: 0.01em;
 }
 
 /* 代码块样式 */
@@ -92,61 +94,80 @@ a:hover {
   opacity: 0.8;
 }
 
+/* 标签链接样式 */
+.tag-link {
+  display: inline-block;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.tag-link:hover {
+  background-color: var(--accent);
+  color: #ffffff !important;
+  border-color: var(--accent);
+  opacity: 1;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
 /* 文章内容样式 */
 .prose {
   max-width: 65ch;
   margin: 0 auto;
   font-size: 1.0625rem;
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
 .prose h1, .prose h2, .prose h3 {
   color: var(--text-primary);
   font-weight: 700;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
 }
 
 .prose h1 {
   font-size: 2.25rem;
-  line-height: 1.2;
+  line-height: 1.3;
+  margin-top: 0;
 }
 
 .prose h2 {
   font-size: 1.875rem;
-  line-height: 1.25;
+  line-height: 1.35;
 }
 
 .prose h3 {
   font-size: 1.5rem;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .prose h4 {
   font-size: 1.25rem;
   font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
   color: var(--text-primary);
+  line-height: 1.5;
 }
 
 .prose p {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   color: var(--text-secondary);
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
 .prose ul, .prose ol {
-  margin-bottom: 1.25rem;
-  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.75rem;
   color: var(--text-secondary);
 }
 
 .prose li {
-  margin-bottom: 0.5rem;
-  line-height: 1.75;
+  margin-bottom: 0.75rem;
+  line-height: 1.8;
 }
 
 .prose strong {
@@ -156,17 +177,19 @@ a:hover {
 
 .prose img {
   border-radius: 0.5rem;
-  margin: 2rem 0;
+  margin: 2.5rem 0;
   max-width: 100%;
   height: auto;
 }
 
 .prose blockquote {
   border-left: 4px solid var(--accent);
-  padding-left: 1rem;
+  padding-left: 1.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-style: italic;
   color: var(--text-secondary);
-  margin: 1.5rem 0;
+  margin: 2rem 0;
 }
 
 .prose a {

@@ -33,7 +33,7 @@ const formattedDate = new Intl.DateTimeFormat('zh-CN', {
     {tags.length > 0 && (
       <div class="flex flex-wrap gap-2">
         {tags.map(tag => (
-          <span class="text-xs px-2 py-1 bg-[var(--bg-primary)] rounded-full text-[var(--text-secondary)]">
+          <span class="text-xs px-2 py-1 rounded-full border" style="background-color: var(--bg-primary); color: var(--text-secondary); border-color: var(--border-color);">
             #{tag}
           </span>
         ))}
