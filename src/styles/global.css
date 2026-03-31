@@ -93,12 +93,33 @@ a:hover {
   opacity: 0.8;
 }
 
+/* 文本选中样式 */
+::selection {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
 /* 标签链接样式 */
 .tag-link {
   display: inline-block;
   background-color: var(--bg-secondary);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
+}
+
+.tag-link::selection {
+  background-color: var(--accent);
+  color: #ffffff !important;
+}
+
+.tag-link::-moz-selection {
+  background-color: var(--accent);
+  color: #ffffff !important;
 }
 
 .tag-link:hover {
@@ -200,4 +221,29 @@ a:hover {
 
 .prose a:hover {
   text-decoration-color: var(--accent);
+}
+
+.prose a::selection {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.prose a::-moz-selection {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+/* 确保所有标签元素选中时可见 */
+span::selection,
+.tag-link::selection,
+button::selection {
+  background-color: var(--accent);
+  color: #ffffff !important;
+}
+
+span::-moz-selection,
+.tag-link::-moz-selection,
+button::-moz-selection {
+  background-color: var(--accent);
+  color: #ffffff !important;
 }
