@@ -6,18 +6,18 @@
 import DarkModeToggle from './DarkModeToggle.astro';
 ---
 
-<header class="sticky top-0 z-50 bg-[var(--bg-primary)] border-b border-[var(--border-color)] backdrop-blur-sm bg-opacity-90">
-  <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+<header class="sticky top-0 z-50 border-b backdrop-blur-sm" style="background-color: var(--bg-primary); border-color: var(--border-color); background-color: rgba(var(--bg-primary-rgb, 255, 255, 255), 0.9);">
+  <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between" style="min-height: 64px;">
     <!-- Logo -->
-    <a href="/" class="text-2xl font-bold hover:opacity-80 transition-opacity">
+    <a href="/" class="text-2xl font-bold hover:opacity-80 transition-opacity" style="color: var(--text-primary);">
       🦖 恐龙大王
     </a>
 
     <!-- 导航链接 -->
     <div class="flex items-center gap-6">
-      <a href="/" class="hover:text-[var(--accent)] transition-colors">首页</a>
-      <a href="/blog" class="hover:text-[var(--accent)] transition-colors">博客</a>
-      <a href="/about" class="hover:text-[var(--accent)] transition-colors">关于</a>
+      <a href="/" class="transition-colors" style="color: var(--text-primary);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-primary)'">首页</a>
+      <a href="/blog" class="transition-colors" style="color: var(--text-primary);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-primary)'">博客</a>
+      <a href="/about" class="transition-colors" style="color: var(--text-primary);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-primary)'">关于</a>
       <DarkModeToggle />
     </div>
   </nav>
