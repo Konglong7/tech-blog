@@ -7,9 +7,11 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "dev:cms": "node scripts/run-tina-dev.mjs",
+    "build": "node scripts/run-tina-build.mjs && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
@@ -19,5 +21,9 @@
     "astro": "^6.1.2",
     "tailwindcss": "^4.2.2",
     "tinacms": "^3.7.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.9.3"
   }
 }

@@ -22,7 +22,7 @@
 - ✅ SEO 优化（sitemap 自动生成）
 
 ### 内容管理
-- ✅ Tina CMS 集成，可视化内容管理
+- ✅ Tina CMS 配置已接入，配置凭据后可生成管理后台
 - ✅ Markdown 文件管理
 - ✅ 文章草稿功能
 - ✅ 文章元数据管理（标题、描述、日期、标签、作者）
@@ -118,7 +118,7 @@ tech-blog/
 ### 4. Giscus 评论
 - 基于 GitHub Discussions
 - 支持深色模式
-- 自动主题切换
+- 未配置 `PUBLIC_GISCUS_*` 时自动降级为关闭状态
 
 ## 📦 依赖包
 
@@ -142,6 +142,7 @@ tech-blog/
 - ✅ 创建了 vercel.json 配置
 - ✅ 创建了 .env.example 环境变量模板
 - ✅ 编写了详细的 DEPLOYMENT.md 部署指南
+- ✅ 构建脚本支持按环境自动跳过/执行 Tina 后台构建
 - ✅ 项目构建测试通过
 
 ### 支持的部署平台
@@ -204,9 +205,9 @@ npm run preview
 
 ### 短期优化
 1. 配置 Giscus 评论系统的实际参数
-2. 添加更多示例文章
-3. 配置 Google Analytics
-4. 添加文章搜索功能
+2. 配置 Tina Cloud 凭据以启用 `/admin/index.html`
+3. 添加更多示例文章
+4. 配置 Google Analytics
 
 ### 长期优化
 1. 添加文章阅读时间估算

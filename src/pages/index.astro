@@ -18,11 +18,15 @@ const latestPosts = allPosts
   .slice(0, 3);
 ---
 
-<BaseLayout title="恐龙大王的技术博客">
+<BaseLayout
+  title="恐龙大王的技术博客"
+  description="一个使用 Astro 构建的个人技术博客，分享前端开发、编程技术、产品思考与实践总结。"
+  keywords={['Astro', '前端开发', '技术博客', '编程', '恐龙大王']}
+>
   <div class="min-h-screen flex flex-col">
     <Header />
 
-    <main class="flex-1">
+    <main id="main-content" class="flex-1">
       <!-- Hero 区域 -->
       <section class="max-w-6xl mx-auto px-4 py-20 text-center">
         <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
@@ -35,10 +39,8 @@ const latestPosts = allPosts
         </p>
         <a
           href="/blog"
-          class="inline-block px-8 py-3 rounded-lg font-medium transition-all duration-200"
+          class="inline-block px-8 py-3 rounded-lg font-medium transition-all duration-200 hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           style="background-color: var(--accent); color: #ffffff;"
-          onmouseover="this.style.opacity='0.9'"
-          onmouseout="this.style.opacity='1'"
         >
           查看所有文章
         </a>

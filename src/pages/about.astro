@@ -9,11 +9,15 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 ---
 
-<BaseLayout title="关于我 - 恐龙大王的技术博客">
+<BaseLayout
+  title="关于我"
+  description="了解恐龙大王的技术背景、常用技术栈以及联系方式。"
+  keywords={['关于我', '前端开发者', 'React', 'Vue', 'TypeScript']}
+>
   <div class="min-h-screen flex flex-col">
     <Header />
 
-    <main class="flex-1 max-w-4xl mx-auto px-4 py-12 w-full">
+    <main id="main-content" class="flex-1 max-w-4xl mx-auto px-4 py-12 w-full">
       <article class="prose">
         <h1 class="text-4xl font-bold mb-8">关于我</h1>
 

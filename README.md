@@ -42,6 +42,7 @@ tech-blog/
 │   │   ├── about.astro      # 关于页面
 │   │   ├── blog/
 │   │   │   ├── index.astro  # 博客列表
+│   │   │   ├── tag/[tag].astro # 标签归档页
 │   │   │   └── [slug].astro # 文章详情（动态路由）
 │   │   └── rss.xml.ts       # RSS feed
 │   ├── content/             # 博客文章内容
@@ -84,13 +85,19 @@ cp .env.example .env
 编辑 `.env` 文件：
 
 ```env
-# Tina CMS 配置（可选，如果不使用 CMS 可以跳过）
+# Tina CMS 配置（可选；配置后 `npm run build` 会自动生成管理后台）
 TINA_CLIENT_ID=your_client_id_here
 TINA_TOKEN=your_token_here
 TINA_BRANCH=main
 
 # 网站配置
 SITE_URL=https://yourdomain.com
+
+# Giscus 评论配置（全部配置后自动启用）
+PUBLIC_GISCUS_REPO=your-username/your-repo
+PUBLIC_GISCUS_REPO_ID=your_repo_id
+PUBLIC_GISCUS_CATEGORY=Announcements
+PUBLIC_GISCUS_CATEGORY_ID=your_category_id
 ```
 
 ### 4. 启动开发服务器
@@ -139,8 +146,9 @@ author: "恐龙大王"
 ### 使用 Tina CMS 管理文章
 
 1. 启动开发服务器：`npm run dev`
-2. 访问 `/admin/index.html`
-3. 使用可视化界面创建和编辑文章
+2. 如需 CMS 本地开发，使用 `npm run dev:cms`
+3. 访问 `/admin/index.html`
+4. 使用可视化界面创建和编辑文章
 
 ## 🎨 自定义配置
 
@@ -158,10 +166,8 @@ author: "恐龙大王"
 1. 访问 [Giscus 官网](https://giscus.app/)
 2. 按照指引配置你的 GitHub 仓库
 3. 获取配置参数
-4. 编辑 `src/components/Comments.astro`，替换以下内容：
-   - `data-repo`: 你的 GitHub 仓库
-   - `data-repo-id`: 仓库 ID
-   - `data-category-id`: 分类 ID
+4. 推荐直接配置 `.env` 中的 `PUBLIC_GISCUS_*` 变量
+5. 当 `PUBLIC_GISCUS_REPO / PUBLIC_GISCUS_REPO_ID / PUBLIC_GISCUS_CATEGORY_ID` 缺失时，评论区会自动降级为关闭状态
 
 ### 修改主题颜色
 
@@ -210,8 +216,10 @@ npm run build
 | :--- | :--- |
 | `npm install` | 安装依赖 |
 | `npm run dev` | 启动开发服务器 (localhost:4321) |
+| `npm run dev:cms` | 启动带 Tina CMS 的开发模式 |
 | `npm run build` | 构建生产版本到 ./dist/ |
 | `npm run preview` | 本地预览生产版本 |
+| `npm run check` | 运行 Astro 类型与模板检查 |
 | `npm run astro ...` | 运行 Astro CLI 命令 |
 
 ## 🤝 贡献

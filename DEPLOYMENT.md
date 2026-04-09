@@ -14,23 +14,24 @@ npm run build
 
 ### 2. 配置网站 URL
 
-编辑 `astro.config.mjs`，将 `site` 改为你的实际域名：
+在 `.env` 中设置：
 
-```javascript
-export default defineConfig({
-  site: 'https://your-actual-domain.com',
-  // ...
-});
+```env
+SITE_URL=https://your-actual-domain.com
 ```
 
 ### 3. 配置评论系统（可选）
 
-如果要使用 Giscus 评论系统：
+如果要使用 Giscus 评论系统，请在 `.env` 中补全：
 
-1. 访问 https://giscus.app/
-2. 按照指引配置你的 GitHub 仓库
-3. 获取配置参数
-4. 编辑 `src/components/Comments.astro`，替换配置
+```env
+PUBLIC_GISCUS_REPO=your-username/your-repo
+PUBLIC_GISCUS_REPO_ID=your_repo_id
+PUBLIC_GISCUS_CATEGORY=Announcements
+PUBLIC_GISCUS_CATEGORY_ID=your_category_id
+```
+
+其余 `PUBLIC_GISCUS_*` 变量可按需覆盖默认值。
 
 ## 🌐 部署到 Vercel（推荐）
 
@@ -65,6 +66,8 @@ vercel --prod
 - `TINA_CLIENT_ID`: 你的 Tina Client ID
 - `TINA_TOKEN`: 你的 Tina Token
 - `TINA_BRANCH`: main
+- `SITE_URL`: 生产站点域名
+- `PUBLIC_GISCUS_*`: 评论系统公开配置（如需启用）
 
 ## 🎯 部署到 Netlify
 
@@ -276,7 +279,7 @@ node --version
 
 ### 评论不显示
 
-检查 Giscus 配置是否正确，GitHub 仓库是否开启了 Discussions。
+检查 `PUBLIC_GISCUS_REPO / PUBLIC_GISCUS_REPO_ID / PUBLIC_GISCUS_CATEGORY_ID` 是否已配置，且 GitHub 仓库已开启 Discussions。
 
 ---
 

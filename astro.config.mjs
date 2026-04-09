@@ -4,10 +4,11 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
+import { siteUrl } from './site.config.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://yourdomain.com', // 部署时需要替换为实际域名
+  site: siteUrl,
   vite: {
     plugins: [tailwindcss()]
   },

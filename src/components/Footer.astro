@@ -4,6 +4,7 @@
  * 显示版权信息和社交链接
  */
 const currentYear = new Date().getFullYear();
+const enableBusuanzi = import.meta.env.PUBLIC_ENABLE_BUSUANZI === 'true';
 ---
 
 <footer class="bg-[var(--bg-secondary)] border-t border-[var(--border-color)] mt-auto">
@@ -15,11 +16,13 @@ const currentYear = new Date().getFullYear();
       </p>
 
       <!-- 访问量统计 -->
-      <div class="flex items-center gap-4 text-[var(--text-secondary)] text-sm">
-        <span id="busuanzi_container_site_pv">本站访问量: <span id="busuanzi_value_site_pv">-</span> 次</span>
-        <span>•</span>
-        <span id="busuanzi_container_site_uv">独立访客: <span id="busuanzi_value_site_uv">-</span> 人</span>
-      </div>
+      {enableBusuanzi && (
+        <div class="flex items-center gap-4 text-[var(--text-secondary)] text-sm">
+          <span id="busuanzi_container_site_pv">本站访问量: <span id="busuanzi_value_site_pv">-</span> 次</span>
+          <span>•</span>
+          <span id="busuanzi_container_site_uv">独立访客: <span id="busuanzi_value_site_uv">-</span> 人</span>
+        </div>
+      )}
 
       <!-- 社交链接 -->
       <div class="flex gap-4">
@@ -38,5 +41,6 @@ const currentYear = new Date().getFullYear();
   </div>
 </footer>
 
-<!-- 不蒜子访问量统计 -->
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+{enableBusuanzi && (
+  <script is:inline async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+)}

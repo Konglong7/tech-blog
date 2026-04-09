@@ -3,64 +3,121 @@
  * Giscus 评论系统组件
  * 基于 GitHub Discussions 的评论系统
  */
+const giscusConfig = {
+  repo: import.meta.env.PUBLIC_GISCUS_REPO ?? '',
+  repoId: import.meta.env.PUBLIC_GISCUS_REPO_ID ?? '',
+  category: import.meta.env.PUBLIC_GISCUS_CATEGORY ?? 'Announcements',
+  categoryId: import.meta.env.PUBLIC_GISCUS_CATEGORY_ID ?? '',
+  mapping: import.meta.env.PUBLIC_GISCUS_MAPPING ?? 'pathname',
+  strict: import.meta.env.PUBLIC_GISCUS_STRICT ?? '0',
+  reactionsEnabled: import.meta.env.PUBLIC_GISCUS_REACTIONS_ENABLED ?? '1',
+  inputPosition: import.meta.env.PUBLIC_GISCUS_INPUT_POSITION ?? 'bottom',
+  lang: import.meta.env.PUBLIC_GISCUS_LANG ?? 'zh-CN',
+  loading: import.meta.env.PUBLIC_GISCUS_LOADING ?? 'lazy',
+};
+
+const commentsEnabled = Boolean(
+  giscusConfig.repo && giscusConfig.repoId && giscusConfig.categoryId,
+);
 ---
 
 <div id="comments" class="mt-12 pt-8 border-t border-[var(--border-color)]">
   <h2 class="text-2xl font-bold mb-6">评论</h2>
-  <div class="giscus"></div>
+
+  {commentsEnabled ? (
+    <div class="giscus"></div>
+  ) : (
+    <div class="rounded-lg border border-dashed border-[var(--border-color)] p-4 text-sm text-[var(--text-secondary)]">
+      评论系统暂未开启。配置 `PUBLIC_GISCUS_*` 环境变量后会自动启用。
+    </div>
+  )}
 </div>
 
-<script>
-  /**
-   * 动态加载 Giscus 评论系统
-   * 根据当前主题自动切换评论区主题
-   */
-  function loadGiscus() {
-    const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+{commentsEnabled && (
+  <script is:inline define:vars={{ giscusConfig }}>
+    /**
+     * 动态加载 Giscus 评论系统
+     * 主题切换时通过 postMessage 更新主题，而不是反复重建 iframe
+     */
+    function getGiscusTheme() {
+      return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    }
 
-    const script = document.createElement('script');
-    script.src = 'https://giscus.app/client.js';
-    script.setAttribute('data-repo', 'your-username/your-repo'); // 需要替换为实际的仓库
-    script.setAttribute('data-repo-id', 'YOUR_REPO_ID'); // 需要替换
-    script.setAttribute('data-category', 'Announcements');
-    script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID'); // 需要替换
-    script.setAttribute('data-mapping', 'pathname');
-    script.setAttribute('data-strict', '0');
-    script.setAttribute('data-reactions-enabled', '1');
-    script.setAttribute('data-emit-metadata', '0');
-    script.setAttribute('data-input-position', 'bottom');
-    script.setAttribute('data-theme', theme);
-    script.setAttribute('data-lang', 'zh-CN');
-    script.setAttribute('crossorigin', 'anonymous');
-    script.async = true;
+    function syncGiscusTheme() {
+      const iframe = document.querySelector('iframe.giscus-frame');
+      iframe?.contentWindow?.postMessage(
+        {
+          giscus: {
+            setConfig: {
+              theme: getGiscusTheme(),
+            },
+          },
+        },
+        'https://giscus.app',
+      );
+    }
 
-    const container = document.querySelector('.giscus');
-    if (container) {
-      container.innerHTML = '';
+    function loadGiscus() {
+      const container = document.querySelector('.giscus');
+      if (!container) return;
+
+      if (container.querySelector('iframe.giscus-frame')) {
+        syncGiscusTheme();
+        return;
+      }
+
+      if (container.querySelector('script[data-giscus-script="true"]')) {
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.setAttribute('data-repo', giscusConfig.repo);
+      script.setAttribute('data-repo-id', giscusConfig.repoId);
+      script.setAttribute('data-category', giscusConfig.category);
+      script.setAttribute('data-category-id', giscusConfig.categoryId);
+      script.setAttribute('data-mapping', giscusConfig.mapping);
+      script.setAttribute('data-strict', giscusConfig.strict);
+      script.setAttribute('data-reactions-enabled', giscusConfig.reactionsEnabled);
+      script.setAttribute('data-emit-metadata', '0');
+      script.setAttribute('data-input-position', giscusConfig.inputPosition);
+      script.setAttribute('data-theme', getGiscusTheme());
+      script.setAttribute('data-lang', giscusConfig.lang);
+      script.setAttribute('data-loading', giscusConfig.loading);
+      script.setAttribute('crossorigin', 'anonymous');
+      script.dataset.giscusScript = 'true';
+      script.async = true;
+
       container.appendChild(script);
     }
-  }
 
-  // 页面加载时初始化
-  loadGiscus();
+    function setupGiscus() {
+      loadGiscus();
 
-  // 监听主题切换
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.attributeName === 'class') {
-        loadGiscus();
+      if (window.__giscusThemeObserver) {
+        window.__giscusThemeObserver.disconnect();
       }
-    });
-  });
 
-  observer.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ['class']
-  });
+      const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.attributeName === 'class') {
+            syncGiscusTheme();
+          }
+        }
+      });
 
-  // 支持 Astro View Transitions
-  document.addEventListener('astro:after-swap', loadGiscus);
-</script>
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class'],
+      });
+
+      window.__giscusThemeObserver = observer;
+    }
+
+    setupGiscus();
+    document.addEventListener('astro:after-swap', setupGiscus);
+  </script>
+)}
 
 <style>
   .giscus {

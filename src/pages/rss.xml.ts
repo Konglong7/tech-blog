@@ -5,6 +5,7 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
+import { siteUrl } from '../../site.config.mjs';
 
 export async function GET(context: APIContext) {
   const posts = await getCollection('blog');
@@ -15,7 +16,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: '恐龙大王的技术博客',
     description: '分享前端开发、编程技术和个人见解',
-    site: context.site || 'https://yourdomain.com',
+    site: context.site || siteUrl,
     items: publishedPosts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
