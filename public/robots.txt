@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tech-blog-konglong7.pages.dev/sitemap-index.xml

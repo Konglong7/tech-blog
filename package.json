@@ -1,29 +1,34 @@
 {
   "name": "tech-blog",
+  "version": "2.0.0",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
   "scripts": {
-    "dev": "astro dev",
-    "dev:cms": "node scripts/run-tina-dev.mjs",
-    "build": "node scripts/run-tina-build.mjs && astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "check": "astro check"
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.18",
-    "@astrojs/sitemap": "^3.7.2",
-    "@tailwindcss/vite": "^4.2.2",
-    "@tinacms/cli": "^2.2.1",
-    "astro": "^6.1.2",
-    "tailwindcss": "^4.2.2",
-    "tinacms": "^3.7.1"
+    "next": "^15.2.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "next-mdx-remote": "^5.0.0",
+    "gray-matter": "^4.0.3",
+    "framer-motion": "^12.6.3",
+    "gsap": "^3.12.7",
+    "lenis": "^1.3.3",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.2.0",
+    "lucide-react": "^0.501.0",
+    "feed": "^4.2.2"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.4",
-    "typescript": "^5.9.3"
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "^5.8.3",
+    "tailwindcss": "^4.1.3",
+    "@tailwindcss/postcss": "^4.1.3"
   }
 }
